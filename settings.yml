@@ -1,10 +1,10 @@
 ### General
 
-# Set the width of the window
+# Set the width of the window (Deault: 640)
 window_width: 640
-# Set the height of the window (also used for things like detecting "existence" [on-screen position] of sprites)
+# Set the height of the window (also used for things like detecting "existence" [on-screen position] of sprites) (Default: 480)
 window_height: 480
-# Set the settings['score'] counter to 0 by default (Default: 0)
+# Set the score counter (Default: 0)
 score: 0
 
 
@@ -14,15 +14,21 @@ score: 0
 game_speed: 7
 # Enemy ship speed (Default: 3)
 enemy_speed: 3
-# How large the enemy missiles should be (Default: 1 || Higher = bigger / Lower = smaller || 0.1 is minimum || Suggested minimum = 0.4)
+# Number of enemies per row (Default: 10)
+enemies_per_row: 10
+# Number of enemy rows (Default: 2)
+enemy_row_quantity: 2
+# How large the enemy missiles should be (Default: 1 || Higher = bigger / Lower = smaller || 0.1 is minimum || Suggested minimum: 0.4)
 enemy_missile_size: 1
 # Enemy missile speed (Default: 5 - same as settings['player_missile_speed'])
 enemy_missile_speed: 5
-# How far the enemy drops down when they reach the end of their row and drop down a line
+# How far apart (vertically) the enemy rows are from each other (Default: 35 | Measured in pixels)
+enemy_vertical_spacing: 35
+# How far the enemy drops down when they reach the end of their row and drop down a line (Default: 7)
 enemy_reverse_direction_drop_height: 7
 # Player ship speed (Default: 5)
 player_speed: 5
-# How large the player's missile should be (Default: 1 || Higher = bigger / Lower = smaller || 0.1 is minimum || Suggested minimum = 0.4)
+# How large the player's missile should be (Default: 1 || Higher = bigger / Lower = smaller || 0.1 is minimum || Suggested minimum: 0.4)
 player_missile_size: 1
 # Player missile speed (Default: 5)
 player_missile_speed: 5
