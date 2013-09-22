@@ -85,7 +85,7 @@ player = Sprite(20, 400, 'data/player.png')
 player_missile = Sprite(0, settings['window_height'], 'data/player_missile.png')
 # Load enemies' missile sprite
 enemy_missiles = {}
-for row in range(len(enemies)):
+for row in enemies:
 	enemy_missiles[row] = Sprite(0, settings['window_height'], 'data/enemy_missile.png')
 
 
@@ -99,25 +99,27 @@ while quit == 0:
 	screen.blit(backdrop, (0,0))
 
 	## Setup the enemies and their directions
-	for row in range(len(enemies)):
-		for enemy_number in range(len(enemies[row])): # For every enemy...
+	for row in enemies:
+		for enemy_number in enemies[row]: # For every enemy...
 			enemies[row][enemy_number].x += settings['enemy_speed'] # ...start moving
 			enemies[row][enemy_number].render() # Render the enemy
 
 
 
 	## Change Enemy Direction / New Line
-	for row in range(len(enemies)):
+	for row in enemies:
 		if len(enemies[row]) != 0:
 			# Left
-			if enemies[row][len(enemies[row])-1].x > 590: # When the right-most enemy hits the right-hand side of the screen...
+			right_most_enemy = max(enemies[row]) # Find the right-most enemy ("max" key in dict)
+			if enemies[row][right_most_enemy].x > 590: # When the right-most enemy hits the right-hand side of the screen...
 				settings['enemy_speed'] = -(abs(settings['enemy_speed'])) # ...convert their speed to a negative number, forcing them to head to the left
-				for enemy_number in range(len(enemies[row])): # For every enemy...
+				for enemy_number in enemies[row]: # For every enemy...
 					enemies[row][enemy_number].y += settings['enemy_reverse_direction_drop_height'] # ...force them down 5px
 			# Right
-			if enemies[row][0].x < 10: # When the left-most enemy hits the left-hand side of the screen...
+			left_most_enemy = min(enemies[row])
+			if enemies[row][left_most_enemy].x < 10: # When the left-most enemy hits the left-hand side of the screen...
 				settings['enemy_speed'] = abs(settings['enemy_speed']) # ...convert their speed to a positive number, forcing them to head to the right
-				for enemy_number in range(len(enemies[row])): # For every enemy...
+				for enemy_number in enemies[row]: # For every enemy...
 					enemies[row][enemy_number].y += settings['enemy_reverse_direction_drop_height'] # ...force them down 5px
 
 
@@ -131,11 +133,12 @@ while quit == 0:
 		player_missile.y = settings['window_height']
 
 	### Enemy missiles
-	for row in range(len(enemy_missiles)):
+	for row in enemy_missiles:
 		# Create the missile
-		if enemy_missiles[row].y >= settings['window_height'] and len(enemies[row]) > 0: # If there is no enemy missile on the screen (i.e. 'in play')...
-			enemy_missiles[row].x = enemies[row][random.randint(0, len(enemies[row]) - 1)].x # ...create a new one from a random choice of enemy...
-			enemy_missiles[row].y = enemies[row][0].y # ...set the position to wherever the chosen enemy is
+		if enemy_missiles[row].y >= settings['window_height'] and len(enemies[row]) > 0: # If there is no enemy missile on the screen (i.e. 'in play') and there are still enemies on this row...
+			left_most_enemy = min(enemies[row])
+			enemy_missiles[row].x = enemies[row][random.choice(enemies[row].keys())].x # ...create a new one from a random choice of enemy...
+			enemy_missiles[row].y = enemies[row][left_most_enemy].y # ...set the position to wherever the chosen enemy is
 		# Move the missile
 		enemy_missiles[row].render() # Render the enemy missile...
 		enemy_missiles[row].y += settings['enemy_missile_speed'] # ...and make it move down the screen
@@ -152,10 +155,9 @@ while quit == 0:
 
 
 	## Destroy enemy
-	for row in range(len(enemies)):
-		for enemy_number in range(len(enemies[row])):
+	for row in enemies:
+		for enemy_number in enemies[row]:
 			if intersect(player_missile.x, player_missile.y, enemies[row][enemy_number].x, enemies[row][enemy_number].y):
-				settings['score'] += 20
 				# Game cheat setting
 				if settings['piercing_missiles'] == 0:
 					# Reset player missile (only one baddie per missile!)
@@ -173,7 +175,7 @@ while quit == 0:
 	## Game Ending Events
 	### Player events
 	#### Player is hit by enemy missile
-	for row in range(len(enemy_missiles)):
+	for row in enemy_missiles:
 		if intersect(player.x, player.y, enemy_missiles[row].x, enemy_missiles[row].y): # If the player gets hit by an enemy missile...
 			# Explode!
 			explosion = Sprite(player.x, player.y, 'data/explosion.png') # Set explosion coordinates
@@ -184,8 +186,8 @@ while quit == 0:
 			quit = 1
 	### Check enemy events
 	total_enemies_remaining = 0 # For when we check if all enemies have been destroyed
-	for row in range(len(enemies)):
-		for enemy_number in range(len(enemies[row])):
+	for row in enemies:
+		for enemy_number in enemies[row]:
 			# Player hits enemy ship
 			if intersect(player.x, player.y, enemies[row][enemy_number].x, enemies[row][enemy_number].y): # ...check if the player has hit that enemy's ship
 				# Explode!
@@ -196,7 +198,7 @@ while quit == 0:
 				print 'Game Over!'
 				quit = 1
 			# Enemy reaches bottom of screen
-			if enemies[row][enemy_number].y >= settings['window_height']: # ...check if any ships from enemies1 have reached the bottom of the screen
+			if enemies[row][enemy_number].y >= settings['window_height']: # ...check if any enemy ships have reached the bottom of the screen
 				print 'Game Over!'
 				quit = 1
 				break # This prevents having "Game Over!" display once per ship on that row (by default: 10 times -- because they all reach the bottom at the same time)
