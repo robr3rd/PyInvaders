@@ -32,6 +32,7 @@ player_speed: 5
 player_missile_size: 1
 # Player missile speed (Default: 5)
 player_missile_speed: 5
+#NOT CURRENTLY WORKING
 # Player missile fire speed (how "rapidly" the player can shoot) (Default: 2 | Measured in seconds)
 player_missile_fire_speed: 2
 
