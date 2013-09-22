@@ -6,7 +6,7 @@ import yaml # For importing config settings
 ## Import Game Settings
 
 # Make accessible via settings['setting_name']
-settings_file = open('settings.cfg')
+settings_file = open('settings.yml')
 settings = yaml.load(settings_file)
 
 
@@ -15,13 +15,22 @@ settings = yaml.load(settings_file)
 
 class Sprite:
 	"""Class for initializing and rendering the sprites."""
-
 	def __init__(self, xpos, ypos, filename):
 		self.x = xpos
 		self.y = ypos
-		self.bitmap = pygame.image.load(filename)
+		self.image = pygame.image.load(filename)
+		# Game cheat - detect if it is set
+		if 'enemymissile' in filename:
+			self.image = pygame.transform.rotozoom(self.image, 0, settings['enemy_missile_size'])
+		# Game cheat - detect if it is set
+		if 'playermissile' in filename:
+				self.image = pygame.transform.rotozoom(self.image, 0, settings['player_missile_size'])
+		# Game cheat - detect if it is set
+		if 'explosion' in filename:
+			# If the player_missile has a larger size than default, double the size of the explosion
+			self.image = pygame.transform.rotozoom(self.image, 0, settings['player_missile_size'])
 		# Set "black" as the color to make transparent
-		self.bitmap.set_colorkey((0, 0, 0))
+		self.image.set_colorkey((0, 0, 0))
 
 	def set_position(self, xpos, ypos):
 		"""Figure out where we want to put the sprite."""
@@ -29,7 +38,7 @@ class Sprite:
 		self.y = ypos
 
 	def render(self): # Render the sprite
-		screen.blit(self.bitmap, (self.x, self.y))
+		screen.blit(self.image, (self.x, self.y))
 
 
 
@@ -50,7 +59,7 @@ pygame.key.set_repeat(1, 1)
 # Set the window title
 pygame.display.set_caption('PyInvaders')
 # Set the backdrop image
-backdrop = pygame.image.load('data/backdrop.bmp')
+backdrop = pygame.image.load('data/backdrop.png')
 
 
 ### Load all sprites
@@ -64,25 +73,25 @@ enemies_row1 = []
 enemies_row2 = []
 x = 0
 for count in range(10): # For each enemy in this row, load a sprite for each of them (and space them 50px apart)
-	enemies_row1.append(Sprite(50 * x + 50, 50, 'data/baddie.bmp'))
+	enemies_row1.append(Sprite(50 * x + 50, 50, 'data/enemy.png'))
 	x += 1
 	enemy_quantity += 1 # Keep track of our total number of enemies
 x = 0
 for count in range(10): # For each enemy in this row, load a sprite for each of them (and space them 50px apart)
-	enemies_row2.append(Sprite(50 * x + 50, 85, 'data/baddie.bmp')) # NOTE: '85' is '35' pixels below row1
+	enemies_row2.append(Sprite(50 * x + 50, 85, 'data/enemy.png')) # NOTE: '85' is '35' pixels below row1
 	x += 1
 	enemy_quantity += 1 # Keep track of our total number of enemies
 
 #### Load the rest
 
-# Load the hero sprite
-hero = Sprite(20, 400, 'data/hero.bmp')
-# Load the Hero's missile sprite
-our_missile = Sprite(0, settings['window_height'], 'data/heromissile.bmp')
+# Load the player sprite
+player = Sprite(20, 400, 'data/player.png')
+# Load the player's missile sprite
+player_missile = Sprite(0, settings['window_height'], 'data/player_missile.png')
 # Load enemy_row1s' missile sprite
-enemy_row1_missile = Sprite(0, settings['window_height'], 'data/baddiemissile.bmp')
+enemy_row1_missile = Sprite(0, settings['window_height'], 'data/enemy_missile.png')
 # Load enemy_row2s' missile sprite
-enemy_row2_missile = Sprite(0, settings['window_height'], 'data/baddiemissile.bmp')
+enemy_row2_missile = Sprite(0, settings['window_height'], 'data/enemy_missile.png')
 
 
 ## Begin Gameplay
@@ -136,12 +145,12 @@ while quit == 0:
 
 	## Missile Management
 
-	### Hero missile
-	if our_missile.y < (settings['window_height'] - 1) and our_missile.y > 0: # If the player's missile is on the screen (i.e. 'in play')...
-		our_missile.render() # ...show the missile...
-		our_missile.y += -(abs(settings['player_missile_speed'])) # ...and change its coordinates at settings['player_missile_speed'] to give the appearance of motion (negative y-position makes it go up)
+	### player missile
+	if player_missile.y < (settings['window_height'] - 1) and player_missile.y > 0: # If the player's missile is on the screen (i.e. 'in play')...
+		player_missile.render() # ...show the missile...
+		player_missile.y += -(abs(settings['player_missile_speed'])) # ...and change its coordinates at settings['player_missile_speed'] to give the appearance of motion (negative y-position makes it go up)
 	else:
-		our_missile.y = settings['window_height']
+		player_missile.y = settings['window_height']
 
 	### Enemy missiles
 
@@ -162,20 +171,20 @@ while quit == 0:
 	### Missile collision
 
 	#### row1_missile
-	if intersect(our_missile.x, our_missile.y, enemy_row1_missile.x, enemy_row1_missile.y): # If the Hero's missile collides with the enemy_row1_missile...
+	if intersect(player_missile.x, player_missile.y, enemy_row1_missile.x, enemy_row1_missile.y): # If the player's missile collides with the enemy_row1_missile...
 		# Explode!
-		explosion = Sprite(our_missile.x, our_missile.y, 'data/explosion.bmp') # Set explosion coordinates
+		explosion = Sprite(player_missile.x, player_missile.y, 'data/explosion.png') # Set explosion coordinates
 		explosion.render() # Render explosion
 		# Reset missiles
-		(our_missile.x, our_missile.y) = (0, settings['window_height']) # ...reset our missile
+		(player_missile.x, player_missile.y) = (0, settings['window_height']) # ...reset our missile
 		(enemy_row1_missile.x, enemy_row1_missile.y) = (0, settings['window_height']) # ...reset row1's missile
 	#### row2 missile
-	if intersect(our_missile.x, our_missile.y, enemy_row2_missile.x, enemy_row2_missile.y): # If the Hero's missile collides with the enemy_row2_missile...
+	if intersect(player_missile.x, player_missile.y, enemy_row2_missile.x, enemy_row2_missile.y): # If the player's missile collides with the enemy_row2_missile...
 		# Explode!
-		explosion = Sprite(our_missile.x, our_missile.y, 'data/explosion.bmp') # Set explosion coordinates
+		explosion = Sprite(player_missile.x, player_missile.y, 'data/explosion.png') # Set explosion coordinates
 		explosion.render() # Render explosion
 		# Reset missiles
-		(our_missile.x, our_missile.y) = (0, settings['window_height']) # ...reset our missile
+		(player_missile.x, player_missile.y) = (0, settings['window_height']) # ...reset our missile
 		(enemy_row2_missile.x, enemy_row2_missile.y) = (0, settings['window_height']) # ...reset row2's missile
 
 
@@ -183,28 +192,28 @@ while quit == 0:
 	## Destroy enemy
 
 	### enemies_row1
-	for count in range(0, len(enemies_row1)): # If the Hero's missile hits one of the enemy ships...
-		if intersect(our_missile.x, our_missile.y, enemies_row1[count].x, enemies_row1[count].y):
+	for count in range(0, len(enemies_row1)): # If the player's missile hits one of the enemy ships...
+		if intersect(player_missile.x, player_missile.y, enemies_row1[count].x, enemies_row1[count].y):
 			# Game cheat setting
 			if settings['piercing_missiles'] == 0:
-				# Reset Hero missile (only one baddie per missile!)
-				(our_missile.x, our_missile.y) = (0, settings['window_height'])
+				# Reset player missile (only one baddie per missile!)
+				(player_missile.x, player_missile.y) = (0, settings['window_height'])
 			# Explode!
-			explosion = Sprite(enemies_row1[count].x, enemies_row1[count].y, 'data/explosion.bmp') # Set explosion coordinates
+			explosion = Sprite(enemies_row1[count].x, enemies_row1[count].y, 'data/explosion.png') # Set explosion coordinates
 			explosion.render() # Render explosion
 			# ...delete that enemy (enemy destroyed)
 			del enemies_row1[count]
 			settings['score'] += 1 # settings['score'] incrementer
 			break
 	### enemies_row2
-	for count in range(0, len(enemies_row2)): # If the Hero's missile hits one of the enemy ships...
-		if intersect(our_missile.x, our_missile.y, enemies_row2[count].x, enemies_row2[count].y):
+	for count in range(0, len(enemies_row2)): # If the player's missile hits one of the enemy ships...
+		if intersect(player_missile.x, player_missile.y, enemies_row2[count].x, enemies_row2[count].y):
 			# Game cheat setting
 			if settings['piercing_missiles'] == 0:
-				# Reset Hero missile (only one baddie per missile!)
-				(our_missile.x, our_missile.y) = (0, settings['window_height'])
+				# Reset player missile (only one baddie per missile!)
+				(player_missile.x, player_missile.y) = (0, settings['window_height'])
 			# Explode!
-			explosion = Sprite(enemies_row2[count].x, enemies_row2[count].y, 'data/explosion.bmp') # Set explosion coordinates
+			explosion = Sprite(enemies_row2[count].x, enemies_row2[count].y, 'data/explosion.png') # Set explosion coordinates
 			explosion.render() # Render explosion
 			# ...delete that enemy (enemy destroyed)
 			del enemies_row2[count]
@@ -217,41 +226,41 @@ while quit == 0:
 	### Player destroyed
 
 	# Player is hit by row1_missile
-	if intersect(hero.x, hero.y, enemy_row1_missile.x, enemy_row1_missile.y): # If the Hero gets hit by an enemy missile...
+	if intersect(player.x, player.y, enemy_row1_missile.x, enemy_row1_missile.y): # If the player gets hit by an enemy missile...
 		# Explode!
-		explosion = Sprite(hero.x, hero.y, 'data/explosion.bmp') # Set explosion coordinates
+		explosion = Sprite(player.x, player.y, 'data/explosion.png') # Set explosion coordinates
 		explosion.render() # Render explosion
-		# Reset the hero's location offscreen (we need to do this so that we can see the explosion -- otherwise the Hero overlaps it)
-		(hero.x, hero.y) = (0, settings['window_height']) # ...reset our hero
+		# Reset the player's location offscreen (we need to do this so that we can see the explosion -- otherwise the player overlaps it)
+		(player.x, player.y) = (0, settings['window_height']) # ...reset our player
 		print 'Game Over!'
 		quit = 1
 	# Player is hit by row2_missile
-	if intersect(hero.x, hero.y, enemy_row2_missile.x, enemy_row2_missile.y): # If the Hero gets hit by an enemy missile...
+	if intersect(player.x, player.y, enemy_row2_missile.x, enemy_row2_missile.y): # If the player gets hit by an enemy missile...
 		# Explode!
-		explosion = Sprite(hero.x, hero.y, 'data/explosion.bmp') # Set explosion coordinates
+		explosion = Sprite(player.x, player.y, 'data/explosion.png') # Set explosion coordinates
 		explosion.render() # Render explosion
-		# Reset the hero's location offscreen (we need to do this so that we can see the explosion -- otherwise the Hero overlaps it)
-		(hero.x, hero.y) = (0, settings['window_height']) # ...reset our hero
+		# Reset the player's location offscreen (we need to do this so that we can see the explosion -- otherwise the player overlaps it)
+		(player.x, player.y) = (0, settings['window_height']) # ...reset our player
 		print 'Game Over!'
 		quit = 1
 	# Player hits enemy_row1 ship
 	for count in range(0, len(enemies_row1)): # For every enemy...
-		if intersect(hero.x, hero.y, enemies_row1[count].x, enemies_row1[count].y): # ...check if the Hero has hit that enemy's ship
+		if intersect(player.x, player.y, enemies_row1[count].x, enemies_row1[count].y): # ...check if the player has hit that enemy's ship
 			# Explode!
-			explosion = Sprite(hero.x, hero.y, 'data/explosion.bmp') # Set explosion coordinates
+			explosion = Sprite(player.x, player.y, 'data/explosion.png') # Set explosion coordinates
 			explosion.render() # Render explosion
-			# Reset the hero's location offscreen (we need to do this so that we can see the explosion -- otherwise the Hero overlaps it)
-			(hero.x, hero.y) = (0, settings['window_height']) # ...reset our hero
+			# Reset the player's location offscreen (we need to do this so that we can see the explosion -- otherwise the player overlaps it)
+			(player.x, player.y) = (0, settings['window_height']) # ...reset our player
 			print 'Game Over!'
 			quit = 1
 	# Player hits enemy_row2 ship
 	for count in range(0, len(enemies_row2)): # For every enemy...
-		if intersect(hero.x, hero.y, enemies_row2[count].x, enemies_row2[count].y): # ...check if the Hero has hit that enemy's ship
+		if intersect(player.x, player.y, enemies_row2[count].x, enemies_row2[count].y): # ...check if the player has hit that enemy's ship
 			# Explode!
-			explosion = Sprite(hero.x, hero.y, 'data/explosion.bmp') # Set explosion coordinates
+			explosion = Sprite(player.x, player.y, 'data/explosion.png') # Set explosion coordinates
 			explosion.render() # Render explosion
-			# Reset the hero's location offscreen (we need to do this so that we can see the explosion -- otherwise the Hero overlaps it)
-			(hero.x, hero.y) = (0, settings['window_height']) # ...reset our hero
+			# Reset the player's location offscreen (we need to do this so that we can see the explosion -- otherwise the player overlaps it)
+			(player.x, player.y) = (0, settings['window_height']) # ...reset our player
 			print 'Game Over!'
 			quit = 1
 	# Enemy_row1 reaches bottom of screen
@@ -298,28 +307,39 @@ while quit == 0:
 			if our_event.key == pygame.K_ESCAPE:
 				# ...end the game
 				quit = 1
+			### Enable multi-key usage (more than a single key at once -- e.g. firing and moving simultaneously)
+			
+			# Obtain the state of all keys on the keyboard
+			keys = pygame.key.get_pressed()
+			if keys[pygame.K_RIGHT] and player.x < 590: # ...if it's the right key and we won't move off the screen...
+				player = Sprite(player.x, player.y, 'data/player-right.png')
+				player.render()
+				player.x += settings['player_speed'] # ...move right
+			if keys[pygame.K_LEFT] and player.x > 10: # ...if it's the left key and we won't move off the screen...
+				player = Sprite(player.x, player.y, 'data/player-left.png')
+				player.render()
+				player.x -= settings['player_speed'] # ...move left
+			if keys[pygame.K_SPACE]: # ...if it's the space key...
+				if settings['missile_override_option'] == 0: # If missile is already in play, player must wait until it is destroyed to launch another
+					if player_missile.y >= settings['window_height']: # ...if the player's missile is not in play...
+						player_missile.x = player.x #...set missile's x coordinate to player.x...
+						player_missile.y = player.y # ...and set missile's y coordinate to player.y
+				elif settings['missile_override_option'] == 1: # If missile is already in play, it will disappear and a new one will be launched
+					player_missile.x = player.x #...set missile's x coordinate to player.x...
+					player_missile.y = player.y # ...and set missile's y coordinate to player.y
+		if our_event.type == pygame.KEYUP:
+			if our_event.key == pygame.K_RIGHT:
+				player = Sprite(player.x, player.y, 'data/player.png')
+				player.render()
+			if our_event.key == pygame.K_LEFT:
+				player = Sprite(player.x, player.y, 'data/player.png')
+				player.render()
 
-	### Enable multi-key usage (more than a single key at once -- e.g. firing and moving simultaneously)
+
+
 	
-	# Obtain the state of all keys on the keyboard
-	keys = pygame.key.get_pressed()
-	if keys[pygame.K_RIGHT] and hero.x < 590: # ...if it's the right key and we won't move off the screen...
-		hero.x += settings['player_speed'] # ...move right
-	if keys[pygame.K_LEFT] and hero.x > 10: # ...if it's the left key and we won't move off the screen...
-		hero.x -= settings['player_speed'] # ...move left
-	if keys[pygame.K_SPACE]: # ...if it's the space key...
-		if settings['missile_override_option'] == 0: # If missile is already in play, player must wait until it is destroyed to launch another
-			if our_missile.y >= settings['window_height']: # ...if the Hero's missile is not in play...
-				our_missile.x = hero.x #...set missile's x coordinate to hero.x...
-				our_missile.y = hero.y # ...and set missile's y coordinate to hero.y
-		elif settings['missile_override_option'] == 1: # If missile is already in play, it will disappear and a new one will be launched
-			our_missile.x = hero.x #...set missile's x coordinate to hero.x...
-			our_missile.y = hero.y # ...and set missile's y coordinate to hero.y
-
-
-	
-	# Render the Hero (at the bottom because it has to happen AFTER all of the keyboard inputs are captured and acted upon)
-	hero.render()
+	# Render the player (at the bottom because it has to happen AFTER all of the keyboard inputs are captured and acted upon)
+	player.render()
 
 	# Update the display to show all the action that has occured this turn
 	pygame.display.update()

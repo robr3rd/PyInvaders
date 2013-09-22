@@ -11,15 +11,19 @@ score: 0
 ### Speed / Difficulty
 
 # Overall gameplay speed (Default: 5 || Higher = slower / Lower = faster || 0 is minimum)
-game_speed: 0
+game_speed: 7
 # Enemy ship speed (Default: 3)
 enemy_speed: 3
+# How large the enemy missiles should be (Default: 1 || Higher = bigger / Lower = smaller || 0.1 is minimum || Suggested minimum = 0.4)
+enemy_missile_size: 1
 # Enemy missile speed (Default: 5 - same as settings['player_missile_speed'])
 enemy_missile_speed: 5
 # How far the enemy drops down when they reach the end of their row and drop down a line
 enemy_reverse_direction_drop_height: 7
 # Player ship speed (Default: 5)
 player_speed: 5
+# How large the player's missile should be (Default: 1 || Higher = bigger / Lower = smaller || 0.1 is minimum || Suggested minimum = 0.4)
+player_missile_size: 1
 # Player missile speed (Default: 5)
 player_missile_speed: 5
 # Player missile fire speed (how "rapidly" the player can shoot) (Default: 2 | Measured in seconds)
