@@ -195,10 +195,12 @@ while quit == 0:
 				explosion.render() # Render explosion
 				# Reset the player's location offscreen (we need to do this so that we can see the explosion -- otherwise the player overlaps it)
 				(player.x, player.y) = (0, settings['window_height']) # ...reset our player
+				print 'You\'ve struck an enemy ship!'
 				print 'Game Over!'
 				quit = 1
 			# Enemy reaches bottom of screen
 			if enemies[row][enemy_number].y >= settings['window_height']: # ...check if any enemy ships have reached the bottom of the screen
+				print 'The enemy has breached your defenses!'
 				print 'Game Over!'
 				quit = 1
 				break # This prevents having "Game Over!" display once per ship on that row (by default: 10 times -- because they all reach the bottom at the same time)
