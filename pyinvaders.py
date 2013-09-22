@@ -110,7 +110,7 @@ while quit == 0:
 	for row in enemies:
 		if len(enemies[row]) != 0:
 			# Left
-			right_most_enemy = max(enemies[row]) # Find the right-most enemy ("max" key in dict)
+			right_most_enemy = max(enemies[row]) # Find the right-most enemy ("max" key in)
 			if enemies[row][right_most_enemy].x > 590: # When the right-most enemy hits the right-hand side of the screen...
 				settings['enemy_speed'] = -(abs(settings['enemy_speed'])) # ...convert their speed to a negative number, forcing them to head to the left
 				for enemy_number in enemies[row]: # For every enemy...
