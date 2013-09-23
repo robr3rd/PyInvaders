@@ -13,7 +13,7 @@ You must have the following packages installed for PyInvaders to run:
 	- On Debian-based systems: `sudo apt-get install python`
 - PyGame (Standard Python game library)
 	- On Debian-based systems: `sudo apt-get install python-pygame`
-- YAML (To parse user settings)
+- Python-YAML (To parse user settings)
 	- On Debian-based systems: `sudo apt-get install python-yaml`
 
 
