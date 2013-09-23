@@ -190,7 +190,6 @@ while quit == 0:
 				print 'Game Over!'
 				quit = 1
 	### Check enemy events
-	total_enemies_remaining = 0 # For when we check if all enemies have been destroyed
 	for row in enemies:
 		for enemy_number in enemies[row]:
 			# Player hits enemy ship
@@ -209,10 +208,9 @@ while quit == 0:
 				print 'Game Over!'
 				quit = 1
 				break # This prevents having "Game Over!" display once per ship on that row (by default: 10 times -- because they all reach the bottom at the same time)
-			total_enemies_remaining += 1 # For when we check if all enemies have been destroyed		
 
 	#### All enemies destroyed
-	if total_enemies_remaining == 0: # If there are no enemies left (sum of all rows == 0)...
+	if settings['score'] == enemy_quantity: # If there are no enemies left (sum of all rows == 0)...
 		print 'Victory!'
 		quit = 1 # Player Wins!
 

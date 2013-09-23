@@ -3,7 +3,9 @@
 window_width: 640
 # Set the height of the window (also used for things like detecting "existence" [on-screen position] of sprites) (Default: 480)
 window_height: 480
-# Set the score counter (Default: 0)
+# Set the starting score counter (Default: 0)
+# When this equals the number of enemies, the game has been won.
+# This can be used as a "Hanicap" because of this. (e.g. When a game has 20 enemies and you start with a score of 15, you only need to kill 5 enemies to win.)
 score: 0
 
 
@@ -21,7 +23,7 @@ enemy_missile_size: 1
 # Enemy missile speed (Default: 5 - same as settings['player_missile_speed'])
 enemy_missile_speed: 5
 # How many missiles each row of enemies has to fire (Default: 1)
-enemy_missiles_per_row: 4
+enemy_missiles_per_row: 2
 # How far apart (vertically) the enemy rows are from each other (Default: 35 | Measured in pixels)
 enemy_vertical_spacing: 35
 # How far the enemy drops down when they reach the end of their row and drop down a line (Default: 7)
