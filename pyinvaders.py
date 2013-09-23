@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import pygame
 import random
 import yaml # For importing config settings
@@ -86,7 +87,9 @@ player_missile = Sprite(0, settings['window_height'], 'data/player_missile.png')
 # Load enemies' missile sprite
 enemy_missiles = {}
 for row in enemies:
-	enemy_missiles[row] = Sprite(0, settings['window_height'], 'data/enemy_missile.png')
+	enemy_missiles[row] = {}
+	for missile_number in range(settings['enemy_missiles_per_row']):
+		enemy_missiles[row][missile_number] = Sprite(0, settings['window_height'], 'data/enemy_missile.png')
 
 
 ## Begin Gameplay
@@ -134,23 +137,24 @@ while quit == 0:
 
 	### Enemy missiles
 	for row in enemy_missiles:
-		# Create the missile
-		if enemy_missiles[row].y >= settings['window_height'] and len(enemies[row]) > 0: # If there is no enemy missile on the screen (i.e. 'in play') and there are still enemies on this row...
-			left_most_enemy = min(enemies[row])
-			enemy_missiles[row].x = enemies[row][random.choice(enemies[row].keys())].x # ...create a new one from a random choice of enemy...
-			enemy_missiles[row].y = enemies[row][left_most_enemy].y # ...set the position to wherever the chosen enemy is
-		# Move the missile
-		enemy_missiles[row].render() # Render the enemy missile...
-		enemy_missiles[row].y += settings['enemy_missile_speed'] # ...and make it move down the screen
+		for missile_number in enemy_missiles[row]:
+			# Create the missile
+			if enemy_missiles[row][missile_number].y >= settings['window_height'] and len(enemies[row]) > 0: # If there is no enemy missile on the screen (i.e. 'in play') and there are still enemies on this row...
+				left_most_enemy = min(enemies[row])
+				enemy_missiles[row][missile_number].x = enemies[row][random.choice(enemies[row].keys())].x # ...create a new one from a random choice of enemy...
+				enemy_missiles[row][missile_number].y = enemies[row][left_most_enemy].y # ...set the position to wherever the chosen enemy is
+			# Move the missile
+			enemy_missiles[row][missile_number].render() # Render the enemy missile...
+			enemy_missiles[row][missile_number].y += settings['enemy_missile_speed'] # ...and make it move down the screen
 
-		### Missile collision
-		if intersect(player_missile.x, player_missile.y, enemy_missiles[row].x, enemy_missiles[row].y): # If the player's missile collides with the enemy_missiles[row]...
-			# Explode!
-			explosion = Sprite(player_missile.x, player_missile.y, 'data/explosion.png') # Set explosion coordinates
-			explosion.render() # Render explosion
-			# Reset missiles
-			(player_missile.x, player_missile.y) = (0, settings['window_height']) # ...reset our missile
-			(enemy_missiles[row].x, enemy_missiles[row].y) = (0, settings['window_height']) # ...reset row1's missile
+			### Missile collision
+			if intersect(player_missile.x, player_missile.y, enemy_missiles[row][missile_number].x, enemy_missiles[row][missile_number].y): # If the player's missile collides with the enemy_missiles[row]...
+				# Explode!
+				explosion = Sprite(player_missile.x, player_missile.y, 'data/explosion.png') # Set explosion coordinates
+				explosion.render() # Render explosion
+				# Reset missiles
+				(player_missile.x, player_missile.y) = (0, settings['window_height']) # ...reset our missile
+				(enemy_missiles[row][missile_number].x, enemy_missiles[row][missile_number].y) = (0, settings['window_height']) # ...reset row1's missile
 
 
 
@@ -176,14 +180,15 @@ while quit == 0:
 	### Player events
 	#### Player is hit by enemy missile
 	for row in enemy_missiles:
-		if intersect(player.x, player.y, enemy_missiles[row].x, enemy_missiles[row].y): # If the player gets hit by an enemy missile...
-			# Explode!
-			explosion = Sprite(player.x, player.y, 'data/explosion.png') # Set explosion coordinates
-			explosion.render() # Render explosion
-			# Reset the player's location offscreen (we need to do this so that we can see the explosion -- otherwise the player overlaps it)
-			(player.x, player.y) = (0, settings['window_height']) # ...reset our player
-			print 'Game Over!'
-			quit = 1
+		for missile_number in enemy_missiles[row]:
+			if intersect(player.x, player.y, enemy_missiles[row][missile_number].x, enemy_missiles[row][missile_number].y): # If the player gets hit by an enemy missile...
+				# Explode!
+				explosion = Sprite(player.x, player.y, 'data/explosion.png') # Set explosion coordinates
+				explosion.render() # Render explosion
+				# Reset the player's location offscreen (we need to do this so that we can see the explosion -- otherwise the player overlaps it)
+				(player.x, player.y) = (0, settings['window_height']) # ...reset our player
+				print 'Game Over!'
+				quit = 1
 	### Check enemy events
 	total_enemies_remaining = 0 # For when we check if all enemies have been destroyed
 	for row in enemies:
