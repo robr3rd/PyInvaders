@@ -9,9 +9,11 @@ Requirements
 
 You must have the following packages installed for PyInvaders to run:
 
-- PyGame (standard Python game library)
+- Python ('Tis the language PyInvaders is written in!)
+	- On Debian-based systems: `sudo apt-get install python`
+- PyGame (Standard Python game library)
 	- On Debian-based systems: `sudo apt-get install python-pygame`
-- YAML (to parse user settings)
+- YAML (To parse user settings)
 	- On Debian-based systems: `sudo apt-get install python-yaml`
 
 
@@ -23,7 +25,7 @@ Actually running the game is easy!
 Once you download PyInvaders and install the necessary dependencies, simply make `pyinvaders.py` executable and run it!
 
 
-Tip
+Extra
 ==========
 
 To squeeze even more enjoyment out of PyInvaders, take a look inside `settings.yml` and customize to your heart's desire!
