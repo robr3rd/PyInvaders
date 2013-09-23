@@ -5,6 +5,7 @@ import yaml # For importing config settings
 
 
 ## Import Game Settings
+
 # Make accessible via settings['setting_name']
 settings_file = open('settings.yml')
 settings = yaml.load(settings_file)
@@ -12,6 +13,7 @@ settings = yaml.load(settings_file)
 
 
 ## Sprites
+
 class Sprite:
 	"""Class for initializing and rendering the sprites."""
 	def __init__(self, xpos, ypos, filename):
@@ -93,6 +95,7 @@ for row in enemies:
 
 
 ## Begin Gameplay
+
 # If quit == 1 (true) then the game ends
 quit = 0
 
@@ -128,13 +131,13 @@ while quit == 0:
 
 
 	## Missile Management
+
 	### Player missile
 	if player_missile.y < (settings['window_height'] - 1) and player_missile.y > 0: # If the player's missile is on the screen (i.e. 'in play')...
 		player_missile.render() # ...show the missile...
 		player_missile.y += -(abs(settings['player_missile_speed'])) # ...and change its coordinates at settings['player_missile_speed'] to give the appearance of motion (negative y-position makes it go up)
 	else:
 		player_missile.y = settings['window_height']
-
 	### Enemy missiles
 	for row in enemy_missiles:
 		for missile_number in enemy_missiles[row]:
@@ -153,7 +156,9 @@ while quit == 0:
 				explosion = Sprite(player_missile.x, player_missile.y, 'data/explosion.png') # Set explosion coordinates
 				explosion.render() # Render explosion
 				# Reset missiles
-				(player_missile.x, player_missile.y) = (0, settings['window_height']) # ...reset our missile
+				# Game cheat setting
+				if settings['piercing_missiles'] == 0: # If our missiles are not piercing...
+					(player_missile.x, player_missile.y) = (0, settings['window_height']) # ...reset our missile
 				(enemy_missiles[row][missile_number].x, enemy_missiles[row][missile_number].y) = (0, settings['window_height']) # ...reset row1's missile
 
 
@@ -163,8 +168,8 @@ while quit == 0:
 		for enemy_number in enemies[row]:
 			if intersect(player_missile.x, player_missile.y, enemies[row][enemy_number].x, enemies[row][enemy_number].y):
 				# Game cheat setting
-				if settings['piercing_missiles'] == 0:
-					# Reset player missile (only one baddie per missile!)
+				if settings['piercing_missiles'] == 0: # If our missiles are not piercing...
+					# ...reset player missile (kill only on enemy per missile!)
 					(player_missile.x, player_missile.y) = (0, settings['window_height'])
 				# Explode!
 				explosion = Sprite(enemies[row][enemy_number].x, enemies[row][enemy_number].y, 'data/explosion.png') # Set explosion coordinates
@@ -177,6 +182,7 @@ while quit == 0:
 
 
 	## Game Ending Events
+
 	### Player events
 	#### Player is hit by enemy missile
 	for row in enemy_missiles:
@@ -189,6 +195,7 @@ while quit == 0:
 				(player.x, player.y) = (0, settings['window_height']) # ...reset our player
 				print 'Game Over!'
 				quit = 1
+
 	### Check enemy events
 	for row in enemies:
 		for enemy_number in enemies[row]:
@@ -210,18 +217,21 @@ while quit == 0:
 				break # This prevents having "Game Over!" display once per ship on that row (by default: 10 times -- because they all reach the bottom at the same time)
 
 	#### All enemies destroyed
-	if settings['score'] == enemy_quantity: # If there are no enemies left (sum of all rows == 0)...
+	# Game cheat
+	if settings['score'] == enemy_quantity: # If we've killed all of the enemies... (ACTUALLY: If our score is == to the total number of enemies)
 		print 'Victory!'
 		quit = 1 # Player Wins!
 
 
 
 	## Live settings['score'] Counter
+
 	screen.blit(pygame.font.Font(None, 50).render('Score: ' + str(settings['score']) + ' / ' + str(enemy_quantity), True, (255,255,255)), (5, 5)) # Display the settings['score'] to the player | (5,5) is the x,y coordinates
 
 
 
 	## Keyboard Navigation
+
 	### Capture events for quitting
 	# Check for player events
 	for our_event in pygame.event.get():

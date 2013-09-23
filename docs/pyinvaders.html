@@ -46,7 +46,7 @@
       <p>Make accessible via settings['setting_name']</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="n">settings_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;settings.cfg&#39;</span><span class="p">)</span>
+      <div class="highlight"><pre><span class="n">settings_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;settings.yml&#39;</span><span class="p">)</span>
 <span class="n">settings</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">settings_file</span><span class="p">)</span></pre></div>
     </div>
   </div>
@@ -83,7 +83,10 @@
       
     </div>
     <div class='code'>
-      <div class="highlight"><pre></pre></div>
+      <div class="highlight"><pre>	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xpos</span><span class="p">,</span> <span class="n">ypos</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">xpos</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">ypos</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -92,13 +95,11 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-6'>#</a>
       </div>
-      
+      <p>Game cheat - detect if it is set</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xpos</span><span class="p">,</span> <span class="n">ypos</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">xpos</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">ypos</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">bitmap</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></pre></div>
+      <div class="highlight"><pre>		<span class="k">if</span> <span class="s">&#39;enemy_missile&#39;</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">rotozoom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_missile_size&#39;</span><span class="p">])</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -107,10 +108,11 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-7'>#</a>
       </div>
-      <p>Set "black" as the color to make transparent</p>
+      <p>Game cheat - detect if it is set</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>		<span class="bp">self</span><span class="o">.</span><span class="n">bitmap</span><span class="o">.</span><span class="n">set_colorkey</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span></pre></div>
+      <div class="highlight"><pre>		<span class="k">if</span> <span class="s">&#39;player_missile&#39;</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">rotozoom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;player_missile_size&#39;</span><span class="p">])</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -119,10 +121,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-8'>#</a>
       </div>
-      <p>Figure out where we want to put the sprite.</p>
+      <p>Game cheat - detect if it is set</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>	<span class="k">def</span> <span class="nf">set_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xpos</span><span class="p">,</span> <span class="n">ypos</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre>		<span class="k">if</span> <span class="s">&#39;explosion&#39;</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -131,11 +133,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-9'>#</a>
       </div>
-      
+      <p>If the player_missile has a larger size than default, double the size of the explosion</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>		<span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">xpos</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">ypos</span></pre></div>
+      <div class="highlight"><pre>			<span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">rotozoom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;player_missile_size&#39;</span><span class="p">])</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -144,11 +145,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-10'>#</a>
       </div>
-      
+      <p>Set "black" as the color to make transparent</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>	<span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c"># Render the sprite</span>
-		<span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bitmap</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">))</span></pre></div>
+      <div class="highlight"><pre>		<span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">set_colorkey</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -157,10 +157,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-11'>#</a>
       </div>
-      <p>Setup collision detection.</p>
+      <p>Figure out where we want to put the sprite.</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">def</span> <span class="nf">intersect</span><span class="p">(</span><span class="n">s1_x</span><span class="p">,</span> <span class="n">s1_y</span><span class="p">,</span> <span class="n">s2_x</span><span class="p">,</span> <span class="n">s2_y</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre>	<span class="k">def</span> <span class="nf">set_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xpos</span><span class="p">,</span> <span class="n">ypos</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -172,10 +172,8 @@
       
     </div>
     <div class='code'>
-      <div class="highlight"><pre>	<span class="k">if</span> <span class="p">(</span><span class="n">s1_x</span> <span class="o">&gt;</span> <span class="n">s2_x</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">s1_x</span> <span class="o">&lt;</span> <span class="n">s2_x</span> <span class="o">+</span> <span class="mi">32</span><span class="p">)</span> <span class="ow">and</span><span class="p">(</span><span class="n">s1_y</span> <span class="o">&gt;</span> <span class="n">s2_y</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">s1_y</span> <span class="o">&lt;</span> <span class="n">s2_y</span> <span class="o">+</span> <span class="mi">32</span><span class="p">):</span>
-		<span class="k">return</span> <span class="mi">1</span>
-	<span class="k">else</span><span class="p">:</span>
-		<span class="k">return</span> <span class="mi">0</span></pre></div>
+      <div class="highlight"><pre>		<span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">xpos</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">ypos</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -184,10 +182,11 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-13'>#</a>
       </div>
-      <p>Initialize</p>
+      
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span></pre></div>
+      <div class="highlight"><pre>	<span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c"># Render the sprite</span>
+		<span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">))</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -196,10 +195,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-14'>#</a>
       </div>
-      <p>Set the window size (HARDCODED at 640xsettings['window_height'])</p>
+      <p>Setup collision detection.</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">((</span><span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_width&#39;</span><span class="p">],</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">]))</span></pre></div>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">intersect</span><span class="p">(</span><span class="n">s1_x</span><span class="p">,</span> <span class="n">s1_y</span><span class="p">,</span> <span class="n">s2_x</span><span class="p">,</span> <span class="n">s2_y</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -208,10 +207,13 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-15'>#</a>
       </div>
-      <p>Set the keyboard repeating increment to be very fast</p>
+      
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="n">pygame</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">set_repeat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></pre></div>
+      <div class="highlight"><pre>	<span class="k">if</span> <span class="p">(</span><span class="n">s1_x</span> <span class="o">&gt;</span> <span class="n">s2_x</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">s1_x</span> <span class="o">&lt;</span> <span class="n">s2_x</span> <span class="o">+</span> <span class="mi">32</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">s1_y</span> <span class="o">&gt;</span> <span class="n">s2_y</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">s1_y</span> <span class="o">&lt;</span> <span class="n">s2_y</span> <span class="o">+</span> <span class="mi">32</span><span class="p">):</span>
+		<span class="k">return</span> <span class="mi">1</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">return</span> <span class="mi">0</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -220,10 +222,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-16'>#</a>
       </div>
-      <p>Set the window title</p>
+      <p>Initialize</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s">&#39;PyInvaders&#39;</span><span class="p">)</span></pre></div>
+      <div class="highlight"><pre><span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -232,10 +234,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-17'>#</a>
       </div>
-      <p>Set the backdrop image</p>
+      <p>Set the keyboard repeating increment to be very fast</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="n">backdrop</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&#39;data/backdrop.bmp&#39;</span><span class="p">)</span></pre></div>
+      <div class="highlight"><pre><span class="n">pygame</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">set_repeat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -244,11 +246,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-18'>#</a>
       </div>
-      <h2>Load all sprites</h2>
-<h3>Load the enemies</h3>
+      <p>Set the window title</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre></pre></div>
+      <div class="highlight"><pre><span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s">&#39;PyInvaders&#39;</span><span class="p">)</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -257,10 +258,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-19'>#</a>
       </div>
-      <p>Keep track of our total number of enemies</p>
+      <p>Set the window size</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="n">enemy_quantity</span> <span class="o">=</span> <span class="mi">0</span></pre></div>
+      <div class="highlight"><pre><span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">((</span><span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_width&#39;</span><span class="p">],</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">]))</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -269,10 +270,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-20'>#</a>
       </div>
-      <p>Initialize the "enemies_row1" list [NOTE: "Row1" = The TOP-most row]</p>
+      <p>Set the backdrop image</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="n">enemies_row1</span> <span class="o">=</span> <span class="p">[]</span></pre></div>
+      <div class="highlight"><pre><span class="n">backdrop</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&#39;data/backdrop.png&#39;</span><span class="p">)</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -281,20 +282,14 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-21'>#</a>
       </div>
-      <p>Initialize the "enemies_row2" list [NOTE: "Row2" = the second row from the TOP]</p>
+      <h2>Load all sprites</h2>
+<h3>Load the enemies</h3>
+<p>Keep track of our total number of enemies</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="n">enemies_row2</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span> <span class="c"># For each enemy in this row, load a sprite for each of them (and space them 50px apart)</span>
-	<span class="n">enemies_row1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Sprite</span><span class="p">(</span><span class="mi">50</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="s">&#39;data/baddie.bmp&#39;</span><span class="p">))</span>
-	<span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>
-	<span class="n">enemy_quantity</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c"># Keep track of our total number of enemies</span>
-<span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span> <span class="c"># For each enemy in this row, load a sprite for each of them (and space them 50px apart)</span>
-	<span class="n">enemies_row2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Sprite</span><span class="p">(</span><span class="mi">50</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="s">&#39;data/baddie.bmp&#39;</span><span class="p">))</span> <span class="c"># NOTE: &#39;85&#39; is &#39;35&#39; pixels below row1</span>
-	<span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>
-	<span class="n">enemy_quantity</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c"># Keep track of our total number of enemies</span></pre></div>
+      <div class="highlight"><pre><span class="n">enemy_quantity</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">row_altitude</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">enemies</span> <span class="o">=</span> <span class="p">{}</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -303,10 +298,11 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-22'>#</a>
       </div>
-      <h3>Load the rest</h3>
+      <p>For each row that we need to draw...</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre></pre></div>
+      <div class="highlight"><pre><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_row_quantity&#39;</span><span class="p">]):</span>
+	<span class="n">x</span> <span class="o">=</span> <span class="mi">0</span> <span class="c"># Start every row at enemy #0</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -315,10 +311,11 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-23'>#</a>
       </div>
-      <p>Load the hero sprite</p>
+      <p>...draw each enemy that we need to draw per row...</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="n">hero</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="s">&#39;data/hero.bmp&#39;</span><span class="p">)</span></pre></div>
+      <div class="highlight"><pre>	<span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+	<span class="k">for</span> <span class="n">enemy_number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemies_per_row&#39;</span><span class="p">]):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -327,10 +324,13 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-24'>#</a>
       </div>
-      <p>Load the Hero's missile sprite</p>
+      <p>...render a sprite at that enemy's location...</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="n">our_missile</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">],</span> <span class="s">&#39;data/heromissile.bmp&#39;</span><span class="p">)</span></pre></div>
+      <div class="highlight"><pre>		<span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">enemy_number</span><span class="p">]</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="mi">50</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">50</span><span class="p">,</span> <span class="n">row_altitude</span><span class="p">,</span> <span class="s">&#39;data/enemy.png&#39;</span><span class="p">)</span>
+		<span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c"># ...increase the horizontal offset for the next enemy by 1 (so it is placed &quot;1&quot; ship-length over)...</span>
+		<span class="n">enemy_quantity</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c"># Keep track of our total number of enemies</span>
+	<span class="n">row_altitude</span> <span class="o">+=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_vertical_spacing&#39;</span><span class="p">]</span> <span class="c"># ...set the altitude of the next row to be 35 pixels lower than the current row</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -339,10 +339,11 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-25'>#</a>
       </div>
-      <p>Load enemy_row1s' missile sprite</p>
+      <h3>Load the rest</h3>
+<p>Load the player sprite</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="n">enemy_row1_missile</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">],</span> <span class="s">&#39;data/baddiemissile.bmp&#39;</span><span class="p">)</span></pre></div>
+      <div class="highlight"><pre><span class="n">player</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="s">&#39;data/player.png&#39;</span><span class="p">)</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -351,10 +352,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-26'>#</a>
       </div>
-      <p>Load enemy_row2s' missile sprite</p>
+      <p>Load the player's missile sprite</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="n">enemy_row2_missile</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">],</span> <span class="s">&#39;data/baddiemissile.bmp&#39;</span><span class="p">)</span></pre></div>
+      <div class="highlight"><pre><span class="n">player_missile</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">],</span> <span class="s">&#39;data/player_missile.png&#39;</span><span class="p">)</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -363,10 +364,14 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-27'>#</a>
       </div>
-      <h1>Begin Gameplay</h1>
+      <p>Load enemies' missile sprite</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre></pre></div>
+      <div class="highlight"><pre><span class="n">enemy_missiles</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">enemies</span><span class="p">:</span>
+	<span class="n">enemy_missiles</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+	<span class="k">for</span> <span class="n">missile_number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_missiles_per_row&#39;</span><span class="p">]):</span>
+		<span class="n">enemy_missiles</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">missile_number</span><span class="p">]</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">],</span> <span class="s">&#39;data/enemy_missile.png&#39;</span><span class="p">)</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -375,10 +380,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-28'>#</a>
       </div>
-      <p>If quit == 1 (true) then the game ends</p>
+      <h1>Begin Gameplay</h1>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="n">quit</span> <span class="o">=</span> <span class="mi">0</span></pre></div>
+      <div class="highlight"><pre></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -387,10 +392,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-29'>#</a>
       </div>
-      <p>So long as quit == 0 the game shall go on</p>
+      <p>If quit == 1 (true) then the game ends</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">while</span> <span class="n">quit</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span></pre></div>
+      <div class="highlight"><pre><span class="n">quit</span> <span class="o">=</span> <span class="mi">0</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -399,10 +404,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-30'>#</a>
       </div>
-      <p>Position the backdrop image, starting at the top-left</p>
+      <p>So long as quit == 0 the game shall go on</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>	<span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">backdrop</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span></pre></div>
+      <div class="highlight"><pre><span class="k">while</span> <span class="n">quit</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -411,15 +416,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-31'>#</a>
       </div>
-      <h2>Setup the enemies and their directions</h2>
+      <p>Position the backdrop image, starting at the top-left</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>	<span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">enemies_row1</span><span class="p">)):</span> <span class="c"># For every enemy...</span>
-		<span class="n">enemies_row1</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="o">+=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_speed&#39;</span><span class="p">]</span> <span class="c"># ...start moving</span>
-		<span class="n">enemies_row1</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># Render the enemy</span>
-	<span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">enemies_row2</span><span class="p">)):</span> <span class="c"># For every enemy_row2...</span>
-		<span class="n">enemies_row2</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="o">+=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_speed&#39;</span><span class="p">]</span> <span class="c"># ...start moving</span>
-		<span class="n">enemies_row2</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># Render the enemy</span></pre></div>
+      <div class="highlight"><pre>	<span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">backdrop</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -428,10 +428,13 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-32'>#</a>
       </div>
-      <h1>Change Enemy Direction / New Line</h1>
+      <h1>Setup the enemies and their directions</h1>
     </div>
     <div class='code'>
-      <div class="highlight"><pre></pre></div>
+      <div class="highlight"><pre>	<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">enemies</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">enemy_number</span> <span class="ow">in</span> <span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">]:</span> <span class="c"># For every enemy...</span>
+			<span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">enemy_number</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="o">+=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_speed&#39;</span><span class="p">]</span> <span class="c"># ...start moving</span>
+			<span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">enemy_number</span><span class="p">]</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># Render the enemy</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -440,10 +443,11 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-33'>#</a>
       </div>
-      <h2>Row1</h2>
+      <h1>Change Enemy Direction / New Line</h1>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">enemies_row1</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span></pre></div>
+      <div class="highlight"><pre>	<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">enemies</span><span class="p">:</span>
+		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -455,10 +459,11 @@
       <p>Left</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>		<span class="k">if</span> <span class="n">enemies_row1</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">enemies_row1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">590</span><span class="p">:</span> <span class="c"># When the right-most enemy hits the right-hand side of the screen...</span>
-			<span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_speed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_speed&#39;</span><span class="p">]))</span> <span class="c"># ...convert their speed to a negative number, forcing them to head to the left</span>
-			<span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">enemies_row1</span><span class="p">)):</span> <span class="c"># For every enemy...</span>
-				<span class="n">enemies_row1</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_reverse_direction_drop_height&#39;</span><span class="p">]</span> <span class="c"># ...force them down 5px</span></pre></div>
+      <div class="highlight"><pre>			<span class="n">right_most_enemy</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">])</span> <span class="c"># Find the right-most enemy (&quot;max&quot; key in)</span>
+			<span class="k">if</span> <span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">right_most_enemy</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">590</span><span class="p">:</span> <span class="c"># When the right-most enemy hits the right-hand side of the screen...</span>
+				<span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_speed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_speed&#39;</span><span class="p">]))</span> <span class="c"># ...convert their speed to a negative number, forcing them to head to the left</span>
+				<span class="k">for</span> <span class="n">enemy_number</span> <span class="ow">in</span> <span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">]:</span> <span class="c"># For every enemy...</span>
+					<span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">enemy_number</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_reverse_direction_drop_height&#39;</span><span class="p">]</span> <span class="c"># ...force them down 5px</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -470,10 +475,11 @@
       <p>Right</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>		<span class="k">if</span> <span class="n">enemies_row1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span> <span class="c"># When the left-most enemy hits the left-hand side of the screen...</span>
-			<span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_speed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_speed&#39;</span><span class="p">])</span> <span class="c"># ...convert their speed to a positive number, forcing them to head to the right</span>
-			<span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">enemies_row1</span><span class="p">)):</span> <span class="c"># For every enemy...</span>
-				<span class="n">enemies_row1</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_reverse_direction_drop_height&#39;</span><span class="p">]</span> <span class="c"># ...force them down 5px</span></pre></div>
+      <div class="highlight"><pre>			<span class="n">left_most_enemy</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">])</span>
+			<span class="k">if</span> <span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">left_most_enemy</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span> <span class="c"># When the left-most enemy hits the left-hand side of the screen...</span>
+				<span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_speed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_speed&#39;</span><span class="p">])</span> <span class="c"># ...convert their speed to a positive number, forcing them to head to the right</span>
+				<span class="k">for</span> <span class="n">enemy_number</span> <span class="ow">in</span> <span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">]:</span> <span class="c"># For every enemy...</span>
+					<span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">enemy_number</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_reverse_direction_drop_height&#39;</span><span class="p">]</span> <span class="c"># ...force them down 5px</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -482,10 +488,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-36'>#</a>
       </div>
-      <h2>Row2</h2>
+      <h1>Missile Management</h1>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">enemies_row2</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span></pre></div>
+      <div class="highlight"><pre></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -494,13 +500,14 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-37'>#</a>
       </div>
-      <p>Left</p>
+      <h2>Player missile</h2>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>		<span class="k">if</span> <span class="n">enemies_row2</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">enemies_row2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">590</span><span class="p">:</span> <span class="c"># When the right-most enemy hits the right-hand side of the screen...</span>
-			<span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_speed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_speed&#39;</span><span class="p">]))</span> <span class="c"># ...convert their speed to a negative number, forcing them to head to the left</span>
-			<span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">enemies_row2</span><span class="p">)):</span> <span class="c"># For every enemy...</span>
-				<span class="n">enemies_row2</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_reverse_direction_drop_height&#39;</span><span class="p">]</span> <span class="c"># ...force them down 5px</span></pre></div>
+      <div class="highlight"><pre>	<span class="k">if</span> <span class="n">player_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">player_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># If the player&#39;s missile is on the screen (i.e. &#39;in play&#39;)...</span>
+		<span class="n">player_missile</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># ...show the missile...</span>
+		<span class="n">player_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="o">-</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s">&#39;player_missile_speed&#39;</span><span class="p">]))</span> <span class="c"># ...and change its coordinates at settings[&#39;player_missile_speed&#39;] to give the appearance of motion (negative y-position makes it go up)</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="n">player_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">]</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -509,13 +516,11 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-38'>#</a>
       </div>
-      <p>Right</p>
+      <h2>Enemy missiles</h2>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>		<span class="k">if</span> <span class="n">enemies_row2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span> <span class="c"># When the left-most enemy hits the left-hand side of the screen...</span>
-			<span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_speed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_speed&#39;</span><span class="p">])</span> <span class="c"># ...convert their speed to a positive number, forcing them to head to the right</span>
-			<span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">enemies_row2</span><span class="p">)):</span> <span class="c"># For every enemy...</span>
-				<span class="n">enemies_row2</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_reverse_direction_drop_height&#39;</span><span class="p">]</span> <span class="c"># ...force them down 5px</span></pre></div>
+      <div class="highlight"><pre>	<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">enemy_missiles</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">missile_number</span> <span class="ow">in</span> <span class="n">enemy_missiles</span><span class="p">[</span><span class="n">row</span><span class="p">]:</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -524,10 +529,13 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-39'>#</a>
       </div>
-      <h1>Missile Management</h1>
+      <p>Create the missile</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre></pre></div>
+      <div class="highlight"><pre>			<span class="k">if</span> <span class="n">enemy_missiles</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">missile_number</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># If there is no enemy missile on the screen (i.e. &#39;in play&#39;) and there are still enemies on this row...</span>
+				<span class="n">left_most_enemy</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">])</span>
+				<span class="n">enemy_missiles</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">missile_number</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span><span class="o">.</span><span class="n">x</span> <span class="c"># ...create a new one from a random choice of enemy...</span>
+				<span class="n">enemy_missiles</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">missile_number</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">left_most_enemy</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="c"># ...set the position to wherever the chosen enemy is</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -536,14 +544,11 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-40'>#</a>
       </div>
-      <h2>Hero missile</h2>
+      <p>Move the missile</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>	<span class="k">if</span> <span class="n">our_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">our_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># If the player&#39;s missile is on the screen (i.e. &#39;in play&#39;)...</span>
-		<span class="n">our_missile</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># ...show the missile...</span>
-		<span class="n">our_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="o">-</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s">&#39;player_missile_speed&#39;</span><span class="p">]))</span> <span class="c"># ...and change its coordinates at settings[&#39;player_missile_speed&#39;] to give the appearance of motion (negative y-position makes it go up)</span>
-	<span class="k">else</span><span class="p">:</span>
-		<span class="n">our_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">]</span></pre></div>
+      <div class="highlight"><pre>			<span class="n">enemy_missiles</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">missile_number</span><span class="p">]</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># Render the enemy missile...</span>
+			<span class="n">enemy_missiles</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">missile_number</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_missile_speed&#39;</span><span class="p">]</span> <span class="c"># ...and make it move down the screen</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -552,10 +557,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-41'>#</a>
       </div>
-      <h2>Enemy missiles</h2>
+      <h2>Missile collision</h2>
     </div>
     <div class='code'>
-      <div class="highlight"><pre></pre></div>
+      <div class="highlight"><pre>			<span class="k">if</span> <span class="n">intersect</span><span class="p">(</span><span class="n">player_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">player_missile</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">enemy_missiles</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">missile_number</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">enemy_missiles</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">missile_number</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">):</span> <span class="c"># If the player&#39;s missile collides with the enemy_missiles[row]...</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -564,12 +569,11 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-42'>#</a>
       </div>
-      <p>Row1</p>
+      <p>Explode!</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>	<span class="k">if</span> <span class="n">enemy_row1_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">enemies_row1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># If there is no enemy missile on the screen (i.e. &#39;in play&#39;)...</span>
-		<span class="n">enemy_row1_missile</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">enemies_row1</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">enemies_row1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span><span class="o">.</span><span class="n">x</span> <span class="c"># ...create a new one from a random choice of enemy...</span>
-		<span class="n">enemy_row1_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">enemies_row1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="c"># ...set the position to wherever the chosen enemy is</span></pre></div>
+      <div class="highlight"><pre>				<span class="n">explosion</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="n">player_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">player_missile</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;data/explosion.png&#39;</span><span class="p">)</span> <span class="c"># Set explosion coordinates</span>
+				<span class="n">explosion</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># Render explosion</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -578,12 +582,13 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-43'>#</a>
       </div>
-      <p>Row2</p>
+      <p>Reset missiles
+Game cheat setting</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>	<span class="k">if</span> <span class="n">enemy_row2_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">enemies_row2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># If there is no enemy missile on the screen (i.e. &#39;in play&#39;)...</span>
-		<span class="n">enemy_row2_missile</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">enemies_row2</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">enemies_row2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span><span class="o">.</span><span class="n">x</span> <span class="c"># ...create a new one from a random choice of enemy...</span>
-		<span class="n">enemy_row2_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">enemies_row2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="c"># ...set the position to wherever the chosen enemy is</span></pre></div>
+      <div class="highlight"><pre>				<span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;piercing_missiles&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># If our missiles are not piercing...</span>
+					<span class="p">(</span><span class="n">player_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">player_missile</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">])</span> <span class="c"># ...reset our missile</span>
+				<span class="p">(</span><span class="n">enemy_missiles</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">missile_number</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">enemy_missiles</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">missile_number</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">])</span> <span class="c"># ...reset row1&#39;s missile</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -592,13 +597,12 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-44'>#</a>
       </div>
-      <p>Enemy missile movement</p>
+      <h1>Destroy enemy</h1>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>	<span class="n">enemy_row1_missile</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># Render the enemy missile...</span>
-	<span class="n">enemy_row1_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_missile_speed&#39;</span><span class="p">]</span> <span class="c"># ...and make it move down the screen</span>
-	<span class="n">enemy_row2_missile</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># Render the enemy_row2 missile...</span>
-	<span class="n">enemy_row2_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;enemy_missile_speed&#39;</span><span class="p">]</span> <span class="c"># ...and make it move down the screen</span></pre></div>
+      <div class="highlight"><pre>	<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">enemies</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">enemy_number</span> <span class="ow">in</span> <span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">]:</span>
+			<span class="k">if</span> <span class="n">intersect</span><span class="p">(</span><span class="n">player_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">player_missile</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">enemy_number</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">enemy_number</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -607,10 +611,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-45'>#</a>
       </div>
-      <h2>Missile collision</h2>
+      <p>Game cheat setting</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre></pre></div>
+      <div class="highlight"><pre>				<span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;piercing_missiles&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># If our missiles are not piercing...</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -619,10 +623,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-46'>#</a>
       </div>
-      <h3>row1_missile</h3>
+      <p>...reset player missile (kill only on enemy per missile!)</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>	<span class="k">if</span> <span class="n">intersect</span><span class="p">(</span><span class="n">our_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">our_missile</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">enemy_row1_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">enemy_row1_missile</span><span class="o">.</span><span class="n">y</span><span class="p">):</span> <span class="c"># If the Hero&#39;s missile collides with the enemy_row1_missile...</span></pre></div>
+      <div class="highlight"><pre>					<span class="p">(</span><span class="n">player_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">player_missile</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">])</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -634,8 +638,8 @@
       <p>Explode!</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>		<span class="n">explosion</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="n">our_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">our_missile</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;data/explosion.bmp&#39;</span><span class="p">)</span> <span class="c"># Set explosion coordinates</span>
-		<span class="n">explosion</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># Render explosion</span></pre></div>
+      <div class="highlight"><pre>				<span class="n">explosion</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">enemy_number</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">enemy_number</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;data/explosion.png&#39;</span><span class="p">)</span> <span class="c"># Set explosion coordinates</span>
+				<span class="n">explosion</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># Render explosion</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -644,11 +648,12 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-48'>#</a>
       </div>
-      <p>Reset missiles</p>
+      <p>...delete that enemy (enemy destroyed)</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>		<span class="p">(</span><span class="n">our_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">our_missile</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">])</span> <span class="c"># ...reset our missile</span>
-		<span class="p">(</span><span class="n">enemy_row1_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">enemy_row1_missile</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">])</span> <span class="c"># ...reset row1&#39;s missile</span></pre></div>
+      <div class="highlight"><pre>				<span class="k">del</span> <span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">enemy_number</span><span class="p">]</span>
+				<span class="n">settings</span><span class="p">[</span><span class="s">&#39;score&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c"># settings[&#39;score&#39;] incrementer</span>
+				<span class="k">break</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -657,10 +662,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-49'>#</a>
       </div>
-      <h3>row2 missile</h3>
+      <h1>Game Ending Events</h1>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>	<span class="k">if</span> <span class="n">intersect</span><span class="p">(</span><span class="n">our_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">our_missile</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">enemy_row2_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">enemy_row2_missile</span><span class="o">.</span><span class="n">y</span><span class="p">):</span> <span class="c"># If the Hero&#39;s missile collides with the enemy_row2_missile...</span></pre></div>
+      <div class="highlight"><pre></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -669,11 +674,13 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-50'>#</a>
       </div>
-      <p>Explode!</p>
+      <h2>Player events</h2>
+<h3>Player is hit by enemy missile</h3>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>		<span class="n">explosion</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="n">our_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">our_missile</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;data/explosion.bmp&#39;</span><span class="p">)</span> <span class="c"># Set explosion coordinates</span>
-		<span class="n">explosion</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># Render explosion</span></pre></div>
+      <div class="highlight"><pre>	<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">enemy_missiles</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">missile_number</span> <span class="ow">in</span> <span class="n">enemy_missiles</span><span class="p">[</span><span class="n">row</span><span class="p">]:</span>
+			<span class="k">if</span> <span class="n">intersect</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">player</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">enemy_missiles</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">missile_number</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">enemy_missiles</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">missile_number</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">):</span> <span class="c"># If the player gets hit by an enemy missile...</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -682,11 +689,11 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-51'>#</a>
       </div>
-      <p>Reset missiles</p>
+      <p>Explode!</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>		<span class="p">(</span><span class="n">our_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">our_missile</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">])</span> <span class="c"># ...reset our missile</span>
-		<span class="p">(</span><span class="n">enemy_row2_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">enemy_row2_missile</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">])</span> <span class="c"># ...reset row2&#39;s missile</span></pre></div>
+      <div class="highlight"><pre>				<span class="n">explosion</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">player</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;data/explosion.png&#39;</span><span class="p">)</span> <span class="c"># Set explosion coordinates</span>
+				<span class="n">explosion</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># Render explosion</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -695,10 +702,12 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-52'>#</a>
       </div>
-      <h1>Destroy enemy</h1>
+      <p>Reset the player's location offscreen (we need to do this so that we can see the explosion -- otherwise the player overlaps it)</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre></pre></div>
+      <div class="highlight"><pre>				<span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">player</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">])</span> <span class="c"># ...reset our player</span>
+				<span class="k">print</span> <span class="s">&#39;Game Over!&#39;</span>
+				<span class="n">quit</span> <span class="o">=</span> <span class="mi">1</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -707,11 +716,11 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-53'>#</a>
       </div>
-      <h2>enemies_row1</h2>
+      <h2>Check enemy events</h2>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>	<span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">enemies_row1</span><span class="p">)):</span> <span class="c"># If the Hero&#39;s missile hits one of the enemy ships...</span>
-		<span class="k">if</span> <span class="n">intersect</span><span class="p">(</span><span class="n">our_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">our_missile</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">enemies_row1</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">enemies_row1</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre>	<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">enemies</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">enemy_number</span> <span class="ow">in</span> <span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">]:</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -720,10 +729,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-54'>#</a>
       </div>
-      <p>Game cheat setting</p>
+      <p>Player hits enemy ship</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>			<span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;piercing_missiles&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span></pre></div>
+      <div class="highlight"><pre>			<span class="k">if</span> <span class="n">intersect</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">player</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">enemy_number</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">enemy_number</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">):</span> <span class="c"># ...check if the player has hit that enemy&#39;s ship</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -732,10 +741,11 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-55'>#</a>
       </div>
-      <p>Reset Hero missile (only one baddie per missile!)</p>
+      <p>Explode!</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>				<span class="p">(</span><span class="n">our_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">our_missile</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">])</span></pre></div>
+      <div class="highlight"><pre>				<span class="n">explosion</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">player</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;data/explosion.png&#39;</span><span class="p">)</span> <span class="c"># Set explosion coordinates</span>
+				<span class="n">explosion</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># Render explosion</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -744,11 +754,13 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-56'>#</a>
       </div>
-      <p>Explode!</p>
+      <p>Reset the player's location offscreen (we need to do this so that we can see the explosion -- otherwise the player overlaps it)</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>			<span class="n">explosion</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="n">enemies_row1</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">enemies_row1</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;data/explosion.bmp&#39;</span><span class="p">)</span> <span class="c"># Set explosion coordinates</span>
-			<span class="n">explosion</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># Render explosion</span></pre></div>
+      <div class="highlight"><pre>				<span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">player</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">])</span> <span class="c"># ...reset our player</span>
+				<span class="k">print</span> <span class="s">&#39;You</span><span class="se">\&#39;</span><span class="s">ve struck an enemy ship!&#39;</span>
+				<span class="k">print</span> <span class="s">&#39;Game Over!&#39;</span>
+				<span class="n">quit</span> <span class="o">=</span> <span class="mi">1</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -757,12 +769,14 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-57'>#</a>
       </div>
-      <p>...delete that enemy (enemy destroyed)</p>
+      <p>Enemy reaches bottom of screen</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>			<span class="k">del</span> <span class="n">enemies_row1</span><span class="p">[</span><span class="n">count</span><span class="p">]</span>
-			<span class="n">settings</span><span class="p">[</span><span class="s">&#39;score&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c"># settings[&#39;score&#39;] incrementer</span>
-			<span class="k">break</span></pre></div>
+      <div class="highlight"><pre>			<span class="k">if</span> <span class="n">enemies</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">enemy_number</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">]:</span> <span class="c"># ...check if any enemy ships have reached the bottom of the screen</span>
+				<span class="k">print</span> <span class="s">&#39;The enemy has breached your defenses!&#39;</span>
+				<span class="k">print</span> <span class="s">&#39;Game Over!&#39;</span>
+				<span class="n">quit</span> <span class="o">=</span> <span class="mi">1</span>
+				<span class="k">break</span> <span class="c"># This prevents having &quot;Game Over!&quot; display once per ship on that row (by default: 10 times -- because they all reach the bottom at the same time)</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -771,11 +785,13 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-58'>#</a>
       </div>
-      <h2>enemies_row2</h2>
+      <h3>All enemies destroyed</h3>
+<p>Game cheat</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>	<span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">enemies_row2</span><span class="p">)):</span> <span class="c"># If the Hero&#39;s missile hits one of the enemy ships...</span>
-		<span class="k">if</span> <span class="n">intersect</span><span class="p">(</span><span class="n">our_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">our_missile</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">enemies_row2</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">enemies_row2</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre>	<span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;score&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">enemy_quantity</span><span class="p">:</span> <span class="c"># If we&#39;ve killed all of the enemies... (ACTUALLY: If our score is == to the total number of enemies)</span>
+		<span class="k">print</span> <span class="s">&#39;Victory!&#39;</span>
+		<span class="n">quit</span> <span class="o">=</span> <span class="mi">1</span> <span class="c"># Player Wins!</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -784,10 +800,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-59'>#</a>
       </div>
-      <p>Game cheat setting</p>
+      <h1>Live settings['score'] Counter</h1>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>			<span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;piercing_missiles&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span></pre></div>
+      <div class="highlight"><pre>	<span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">Font</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s">&#39;Score: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s">&#39;score&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s">&#39; / &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enemy_quantity</span><span class="p">),</span> <span class="bp">True</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">)),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span> <span class="c"># Display the settings[&#39;score&#39;] to the player | (5,5) is the x,y coordinates</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -796,10 +812,10 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-60'>#</a>
       </div>
-      <p>Reset Hero missile (only one baddie per missile!)</p>
+      <h1>Keyboard Navigation</h1>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>				<span class="p">(</span><span class="n">our_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">our_missile</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">])</span></pre></div>
+      <div class="highlight"><pre></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -808,11 +824,11 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-61'>#</a>
       </div>
-      <p>Explode!</p>
+      <h2>Capture events for quitting</h2>
+<p>Check for player events</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>			<span class="n">explosion</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="n">enemies_row2</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">enemies_row2</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;data/explosion.bmp&#39;</span><span class="p">)</span> <span class="c"># Set explosion coordinates</span>
-			<span class="n">explosion</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># Render explosion</span></pre></div>
+      <div class="highlight"><pre>	<span class="k">for</span> <span class="n">our_event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -820,288 +836,6 @@
     <div class='docs'>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-62'>#</a>
-      </div>
-      <p>...delete that enemy (enemy destroyed)</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>			<span class="k">del</span> <span class="n">enemies_row2</span><span class="p">[</span><span class="n">count</span><span class="p">]</span>
-			<span class="n">settings</span><span class="p">[</span><span class="s">&#39;score&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c"># settings[&#39;score&#39;] incrementer</span>
-			<span class="k">break</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-63'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-63'>#</a>
-      </div>
-      <h1>Game Ending Events</h1>
-<h2>Player destroyed</h2>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-64'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-64'>#</a>
-      </div>
-      <p>Player is hit by row1_missile</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>	<span class="k">if</span> <span class="n">intersect</span><span class="p">(</span><span class="n">hero</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">hero</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">enemy_row1_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">enemy_row1_missile</span><span class="o">.</span><span class="n">y</span><span class="p">):</span> <span class="c"># If the Hero gets hit by an enemy missile...</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-65'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-65'>#</a>
-      </div>
-      <p>Explode!</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>		<span class="n">explosion</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="n">hero</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">hero</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;data/explosion.bmp&#39;</span><span class="p">)</span> <span class="c"># Set explosion coordinates</span>
-		<span class="n">explosion</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># Render explosion</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-66'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-66'>#</a>
-      </div>
-      <p>Reset the hero's location offscreen (we need to do this so that we can see the explosion -- otherwise the Hero overlaps it)</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>		<span class="p">(</span><span class="n">hero</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">hero</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">])</span> <span class="c"># ...reset our hero</span>
-		<span class="k">print</span> <span class="s">&#39;Game Over!&#39;</span>
-		<span class="n">quit</span> <span class="o">=</span> <span class="mi">1</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-67'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-67'>#</a>
-      </div>
-      <p>Player is hit by row2_missile</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>	<span class="k">if</span> <span class="n">intersect</span><span class="p">(</span><span class="n">hero</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">hero</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">enemy_row2_missile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">enemy_row2_missile</span><span class="o">.</span><span class="n">y</span><span class="p">):</span> <span class="c"># If the Hero gets hit by an enemy missile...</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-68'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-68'>#</a>
-      </div>
-      <p>Explode!</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>		<span class="n">explosion</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="n">hero</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">hero</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;data/explosion.bmp&#39;</span><span class="p">)</span> <span class="c"># Set explosion coordinates</span>
-		<span class="n">explosion</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># Render explosion</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-69'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-69'>#</a>
-      </div>
-      <p>Reset the hero's location offscreen (we need to do this so that we can see the explosion -- otherwise the Hero overlaps it)</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>		<span class="p">(</span><span class="n">hero</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">hero</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">])</span> <span class="c"># ...reset our hero</span>
-		<span class="k">print</span> <span class="s">&#39;Game Over!&#39;</span>
-		<span class="n">quit</span> <span class="o">=</span> <span class="mi">1</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-70'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-70'>#</a>
-      </div>
-      <p>Player hits enemy_row1 ship</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>	<span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">enemies_row1</span><span class="p">)):</span> <span class="c"># For every enemy...</span>
-		<span class="k">if</span> <span class="n">intersect</span><span class="p">(</span><span class="n">hero</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">hero</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">enemies_row1</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">enemies_row1</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">):</span> <span class="c"># ...check if the Hero has hit that enemy&#39;s ship</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-71'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-71'>#</a>
-      </div>
-      <p>Explode!</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>			<span class="n">explosion</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="n">hero</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">hero</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;data/explosion.bmp&#39;</span><span class="p">)</span> <span class="c"># Set explosion coordinates</span>
-			<span class="n">explosion</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># Render explosion</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-72'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-72'>#</a>
-      </div>
-      <p>Reset the hero's location offscreen (we need to do this so that we can see the explosion -- otherwise the Hero overlaps it)</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>			<span class="p">(</span><span class="n">hero</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">hero</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">])</span> <span class="c"># ...reset our hero</span>
-			<span class="k">print</span> <span class="s">&#39;Game Over!&#39;</span>
-			<span class="n">quit</span> <span class="o">=</span> <span class="mi">1</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-73'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-73'>#</a>
-      </div>
-      <p>Player hits enemy_row2 ship</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>	<span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">enemies_row2</span><span class="p">)):</span> <span class="c"># For every enemy...</span>
-		<span class="k">if</span> <span class="n">intersect</span><span class="p">(</span><span class="n">hero</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">hero</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">enemies_row2</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">enemies_row2</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">):</span> <span class="c"># ...check if the Hero has hit that enemy&#39;s ship</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-74'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-74'>#</a>
-      </div>
-      <p>Explode!</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>			<span class="n">explosion</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="n">hero</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">hero</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;data/explosion.bmp&#39;</span><span class="p">)</span> <span class="c"># Set explosion coordinates</span>
-			<span class="n">explosion</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># Render explosion</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-75'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-75'>#</a>
-      </div>
-      <p>Reset the hero's location offscreen (we need to do this so that we can see the explosion -- otherwise the Hero overlaps it)</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>			<span class="p">(</span><span class="n">hero</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">hero</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">])</span> <span class="c"># ...reset our hero</span>
-			<span class="k">print</span> <span class="s">&#39;Game Over!&#39;</span>
-			<span class="n">quit</span> <span class="o">=</span> <span class="mi">1</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-76'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-76'>#</a>
-      </div>
-      <p>Enemy_row1 reaches bottom of screen</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>	<span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">enemies_row1</span><span class="p">)):</span> <span class="c"># For every enemy...</span>
-		<span class="k">if</span> <span class="n">enemies_row1</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">]:</span> <span class="c"># ...check if any ships from enemy_row1 have reached the bottom of the screen</span>
-			<span class="k">print</span> <span class="s">&#39;Game Over!&#39;</span>
-			<span class="n">quit</span> <span class="o">=</span> <span class="mi">1</span>
-			<span class="k">break</span> <span class="c"># This prevents having &quot;Game Over!&quot; display once per ship on that row (by default: 10 times -- because they all reach the bottom at the same time)</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-77'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-77'>#</a>
-      </div>
-      <p>Enemy_row2 reaches bottom of screen</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>	<span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">enemies_row2</span><span class="p">)):</span> <span class="c"># For every enemy...</span>
-		<span class="k">if</span> <span class="n">enemies_row2</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">]:</span> <span class="c"># ...check if any ships from enemy_row2 have reached the bottom of the screen</span>
-			<span class="k">print</span> <span class="s">&#39;Game Over!&#39;</span>
-			<span class="n">quit</span> <span class="o">=</span> <span class="mi">1</span>
-			<span class="k">break</span> <span class="c"># This prevents having &quot;Game Over!&quot; display once per ship on that row (by default: 10 times -- because they all reach the bottom at the same time)</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-78'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-78'>#</a>
-      </div>
-      <h2>All enemies destroyed</h2>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>	<span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">enemies_row1</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">enemies_row2</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># If there are no enemies left (sum of all rows == 0)...</span>
-		<span class="k">print</span> <span class="s">&#39;Victory!&#39;</span>
-		<span class="n">quit</span> <span class="o">=</span> <span class="mi">1</span> <span class="c"># Player Wins!</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-79'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-79'>#</a>
-      </div>
-      <h2>Live settings['score'] Counter</h2>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-80'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-80'>#</a>
-      </div>
-      <p>The below two lines are commented out because the way we access the settings variables
-settings['score']_font = pygame.font.Font(None, 50) # (Font-family, font-size)
-settings['score']_text = pygame.font.Font(None, 50).render('settings['score']: ' + str(settings['score']) + ' / ' + str(enemy_quantity), True, (255,255,255)) # Set the settings['score'] string</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>	<span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">Font</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s">&#39;Score: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s">&#39;score&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s">&#39; / &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enemy_quantity</span><span class="p">),</span> <span class="bp">True</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">)),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span> <span class="c"># Display the settings[&#39;score&#39;] to the player | (5,5) is the x,y coordinates</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-81'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-81'>#</a>
-      </div>
-      <h1>Keyboard Navigation</h1>
-<h2>Capture events for quitting</h2>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-82'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-82'>#</a>
-      </div>
-      <p>Check for player events</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>	<span class="k">for</span> <span class="n">our_event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-83'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-83'>#</a>
       </div>
       <p>If the player closes the window, quit</p>
     </div>
@@ -1111,10 +845,10 @@ settings['score']_text = pygame.font.Font(None, 50).render('settings['score']: '
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-84'>
+  <div class='section' id='section-63'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-84'>#</a>
+        <a class='octothorpe' href='#section-63'>#</a>
       </div>
       <p>If the player presses a key...</p>
     </div>
@@ -1123,10 +857,10 @@ settings['score']_text = pygame.font.Font(None, 50).render('settings['score']: '
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-85'>
+  <div class='section' id='section-64'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-85'>#</a>
+        <a class='octothorpe' href='#section-64'>#</a>
       </div>
       <p>...if it's the escape key...</p>
     </div>
@@ -1135,10 +869,10 @@ settings['score']_text = pygame.font.Font(None, 50).render('settings['score']: '
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-86'>
+  <div class='section' id='section-65'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-86'>#</a>
+        <a class='octothorpe' href='#section-65'>#</a>
       </div>
       <p>...end the game</p>
     </div>
@@ -1147,58 +881,69 @@ settings['score']_text = pygame.font.Font(None, 50).render('settings['score']: '
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-87'>
+  <div class='section' id='section-66'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-87'>#</a>
+        <a class='octothorpe' href='#section-66'>#</a>
       </div>
       <h2>Enable multi-key usage (more than a single key at once -- e.g. firing and moving simultaneously)</h2>
+<p>Obtain the state of all keys on the keyboard</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre></pre></div>
+      <div class="highlight"><pre>			<span class="n">keys</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">get_pressed</span><span class="p">()</span>
+			<span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">K_RIGHT</span><span class="p">]</span> <span class="ow">and</span> <span class="n">player</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">590</span><span class="p">:</span> <span class="c"># ...if it&#39;s the right key and we won&#39;t move off the screen...</span>
+				<span class="n">player</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">player</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;data/player-right.png&#39;</span><span class="p">)</span> <span class="c"># ...swap out the player&#39;s sprite...</span>
+				<span class="n">player</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># ...render the new sprite...</span>
+				<span class="n">player</span><span class="o">.</span><span class="n">x</span> <span class="o">+=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;player_speed&#39;</span><span class="p">]</span> <span class="c"># ...move right</span>
+			<span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">K_LEFT</span><span class="p">]</span> <span class="ow">and</span> <span class="n">player</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span> <span class="c"># ...if it&#39;s the left key and we won&#39;t move off the screen...</span>
+				<span class="n">player</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">player</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;data/player-left.png&#39;</span><span class="p">)</span> <span class="c"># ...swap out the player&#39;s sprite...</span>
+				<span class="n">player</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># ...render the new sprite...</span>
+				<span class="n">player</span><span class="o">.</span><span class="n">x</span> <span class="o">-=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;player_speed&#39;</span><span class="p">]</span> <span class="c"># ...move left</span>
+			<span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">K_SPACE</span><span class="p">]:</span> <span class="c"># ...if it&#39;s the space key...</span>
+				<span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;missile_override_option&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># If missile is already in play, player must wait until it is destroyed to launch another</span>
+					<span class="k">if</span> <span class="n">player_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">]:</span> <span class="c"># ...if the player&#39;s missile is not in play...</span>
+						<span class="n">player_missile</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">player</span><span class="o">.</span><span class="n">x</span> <span class="c">#...set missile&#39;s x coordinate to player.x...</span>
+						<span class="n">player_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">player</span><span class="o">.</span><span class="n">y</span> <span class="c"># ...and set missile&#39;s y coordinate to player.y</span>
+				<span class="k">elif</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;missile_override_option&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="c"># If missile is already in play, it will disappear and a new one will be launched</span>
+					<span class="n">player_missile</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">player</span><span class="o">.</span><span class="n">x</span> <span class="c">#...set missile&#39;s x coordinate to player.x...</span>
+					<span class="n">player_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">player</span><span class="o">.</span><span class="n">y</span> <span class="c"># ...and set missile&#39;s y coordinate to player.y</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-88'>
+  <div class='section' id='section-67'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-88'>#</a>
+        <a class='octothorpe' href='#section-67'>#</a>
       </div>
-      <p>Obtain the state of all keys on the keyboard</p>
+      <p>When the player releases a key...</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>	<span class="n">keys</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">get_pressed</span><span class="p">()</span>
-	<span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">K_RIGHT</span><span class="p">]</span> <span class="ow">and</span> <span class="n">hero</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">590</span><span class="p">:</span> <span class="c"># ...if it&#39;s the right key and we won&#39;t move off the screen...</span>
-		<span class="n">hero</span><span class="o">.</span><span class="n">x</span> <span class="o">+=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;player_speed&#39;</span><span class="p">]</span> <span class="c"># ...move right</span>
-	<span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">K_LEFT</span><span class="p">]</span> <span class="ow">and</span> <span class="n">hero</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span> <span class="c"># ...if it&#39;s the left key and we won&#39;t move off the screen...</span>
-		<span class="n">hero</span><span class="o">.</span><span class="n">x</span> <span class="o">-=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;player_speed&#39;</span><span class="p">]</span> <span class="c"># ...move left</span>
-	<span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">K_SPACE</span><span class="p">]:</span> <span class="c"># ...if it&#39;s the space key...</span>
-		<span class="k">if</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;missile_override_option&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># If missile is already in play, player must wait until it is destroyed to launch another</span>
-			<span class="k">if</span> <span class="n">our_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;window_height&#39;</span><span class="p">]:</span> <span class="c"># ...if the Hero&#39;s missile is not in play...</span>
-				<span class="n">our_missile</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">hero</span><span class="o">.</span><span class="n">x</span> <span class="c">#...set missile&#39;s x coordinate to hero.x...</span>
-				<span class="n">our_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">hero</span><span class="o">.</span><span class="n">y</span> <span class="c"># ...and set missile&#39;s y coordinate to hero.y</span>
-		<span class="k">elif</span> <span class="n">settings</span><span class="p">[</span><span class="s">&#39;missile_override_option&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="c"># If missile is already in play, it will disappear and a new one will be launched</span>
-			<span class="n">our_missile</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">hero</span><span class="o">.</span><span class="n">x</span> <span class="c">#...set missile&#39;s x coordinate to hero.x...</span>
-			<span class="n">our_missile</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">hero</span><span class="o">.</span><span class="n">y</span> <span class="c"># ...and set missile&#39;s y coordinate to hero.y</span></pre></div>
+      <div class="highlight"><pre>		<span class="k">if</span> <span class="n">our_event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">KEYUP</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">our_event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_RIGHT</span><span class="p">:</span> <span class="c"># ...if they&#39;re done moving right...</span>
+				<span class="n">player</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">player</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;data/player.png&#39;</span><span class="p">)</span> <span class="c"># ...return the player&#39;s sprite back to its original...</span>
+				<span class="n">player</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># ...render the old sprite again</span>
+			<span class="k">if</span> <span class="n">our_event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_LEFT</span><span class="p">:</span> <span class="c"># ...if they&#39;re done moving left...</span>
+				<span class="n">player</span> <span class="o">=</span> <span class="n">Sprite</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">player</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;data/player.png&#39;</span><span class="p">)</span> <span class="c"># ...return the player&#39;s sprite back to its original...</span>
+				<span class="n">player</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c"># ...render the old sprite again</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-89'>
+  <div class='section' id='section-68'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-89'>#</a>
+        <a class='octothorpe' href='#section-68'>#</a>
       </div>
-      <p>Render the Hero (at the bottom because it has to happen AFTER all of the keyboard inputs are captured and acted upon)</p>
+      <p>Render the player (at the bottom because it has to happen AFTER all of the keyboard inputs are captured and acted upon)</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>	<span class="n">hero</span><span class="o">.</span><span class="n">render</span><span class="p">()</span></pre></div>
+      <div class="highlight"><pre>	<span class="n">player</span><span class="o">.</span><span class="n">render</span><span class="p">()</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-90'>
+  <div class='section' id='section-69'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-90'>#</a>
+        <a class='octothorpe' href='#section-69'>#</a>
       </div>
       <p>Update the display to show all the action that has occured this turn</p>
     </div>
@@ -1207,10 +952,10 @@ settings['score']_text = pygame.font.Font(None, 50).render('settings['score']: '
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-91'>
+  <div class='section' id='section-70'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-91'>#</a>
+        <a class='octothorpe' href='#section-70'>#</a>
       </div>
       <p>Set gameplay speed. Lower number == faster gameplay</p>
     </div>
@@ -1219,10 +964,10 @@ settings['score']_text = pygame.font.Font(None, 50).render('settings['score']: '
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-92'>
+  <div class='section' id='section-71'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-92'>#</a>
+        <a class='octothorpe' href='#section-71'>#</a>
       </div>
       <p>Print the player's settings['score'] when the game is over (quit == 1), thus we break out of the while loop</p>
     </div>
