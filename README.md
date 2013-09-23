@@ -28,4 +28,4 @@ Once you download PyInvaders and install the necessary dependencies, simply make
 Extra
 ==========
 
-To squeeze even more enjoyment out of PyInvaders, take a look inside `settings.yml` and customize to your heart's desire!
+To squeeze even more enjoyment out of PyInvaders, take a look inside `settings.yml` and customize to your heart's desire! Every aspect of the game is tweakable!
