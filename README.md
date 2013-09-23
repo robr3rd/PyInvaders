@@ -23,7 +23,7 @@ Actually running the game is easy!
 Once you download PyInvaders and install the necessary dependencies, simply make `pyinvaders.py` executable and run it!
 
 
-Extra
+Tip
 ==========
 
 To squeeze even more enjoyment out of PyInvaders, take a look inside `settings.yml` and customize to your heart's desire!
